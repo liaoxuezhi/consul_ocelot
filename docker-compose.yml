@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  api001:
+    image: ${DOCKER_REGISTRY-}api001
+    build:
+      context: .
+      dockerfile: API001/Dockerfile
+
+  ocelotgateway:
+    image: ${DOCKER_REGISTRY-}ocelotgateway
+    build:
+      context: .
+      dockerfile: OcelotGateway/Dockerfile
+
