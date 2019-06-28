@@ -14,11 +14,5 @@ namespace API002.Controllers
         {
             return $"API002:{DateTime.Now.ToString()}  { Environment.MachineName + " OS:" + Environment.OSVersion.VersionString}";
         }
-
-        [HttpGet("/health")]
-        public IActionResult Heathle()
-        {
-            return Ok();
-        }
     }
 }

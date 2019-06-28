@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClient", "TestClient\Te
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{0265FE0E-08E6-4507-9918-E98BF082CFF7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C0F1131E-0A09-4392-BD90-6BF55474C611}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsulCore", "ConsulCore\ConsulCore.csproj", "{5B943093-E326-43EE-8B4F-79B733BD7760}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,9 +43,16 @@ Global
 		{0265FE0E-08E6-4507-9918-E98BF082CFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0265FE0E-08E6-4507-9918-E98BF082CFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0265FE0E-08E6-4507-9918-E98BF082CFF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B943093-E326-43EE-8B4F-79B733BD7760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B943093-E326-43EE-8B4F-79B733BD7760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B943093-E326-43EE-8B4F-79B733BD7760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B943093-E326-43EE-8B4F-79B733BD7760}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5B943093-E326-43EE-8B4F-79B733BD7760} = {C0F1131E-0A09-4392-BD90-6BF55474C611}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C93320E0-0B29-4ED1-A3F2-F134986BC058}

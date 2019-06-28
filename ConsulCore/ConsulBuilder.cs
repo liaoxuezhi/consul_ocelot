@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Consul;
+using ConsulCore.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System;
 
-namespace API001.Infrastructure
+namespace ConsulCore
 {
-    public class ConsulHostedService
+    public static class ConsulBuilder  
     {
         // Consul服务注册
         public static IApplicationBuilder RegisterConsul(this IApplicationBuilder app, IApplicationLifetime lifetime, HealthService healthService, ConsulService consulService)
@@ -13,9 +15,9 @@ namespace API001.Infrastructure
             var consulClient = new ConsulClient(x => x.Address = new Uri($"http://{consulService.IP}:{consulService.Port}"));//请求注册的 Consul 地址
             var httpCheck = new AgentServiceCheck()
             {
-                DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5),//服务启动多久后注册
+                DeregisterCriticalServiceAfter = TimeSpan.FromMinutes(5),//服务启动多久后注册
                 Interval = TimeSpan.FromSeconds(10),//健康检查时间间隔，或者称为心跳间隔
-                HTTP = $"http://{healthService.IP}:{healthService.Port}/api/health",//健康检查地址
+                HTTP = $"http://{healthService.IP}:{healthService.Port}/health",//健康检查地址
                 Timeout = TimeSpan.FromSeconds(5)
             };
             // Register service with consul
@@ -32,6 +34,10 @@ namespace API001.Infrastructure
             lifetime.ApplicationStopping.Register(() =>
             {
                 consulClient.Agent.ServiceDeregister(registration.ID).Wait();//服务停止时取消注册
+            });
+            app.Map("/health", builder =>
+            {
+                builder.Run(async context => await context.Response.WriteAsync("health"));
             });
             return app;
         }
