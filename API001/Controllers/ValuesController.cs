@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace API001.Controllers
 {
@@ -12,9 +13,19 @@ namespace API001.Controllers
     public class ValuesController : Controller
     {
         private readonly IConfiguration _configuration;
-        public ValuesController(IConfiguration configuration)
+        private readonly ILogger<ValuesController> _logger; 
+        public ValuesController(IConfiguration configuration,ILogger<ValuesController> logger)
         {
             _configuration = configuration;
+            _logger = logger;
+            var message = new
+            {
+                currentDateTime =DateTime.Now,
+                level = "info",
+                hostName = Environment.MachineName,
+                messageInfo="hello world"
+            };
+            _logger.LogInformation(Newtonsoft.Json.JsonConvert.SerializeObject(message));
         }
         [HttpGet]
         public string Get()

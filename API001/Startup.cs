@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SerilogCore;
+using SerilogCore.Models;
 
 namespace API001
 {
@@ -31,14 +33,14 @@ namespace API001
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifeTime)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifeTime,ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.RegisterConsul(appLifeTime, new HealthService()
+            app.AddSerilog(loggerFactory,new SerilogService() { FilePath = Configuration["Serilog:FilePath"] })
+            .RegisterConsul(appLifeTime, new HealthService()
             {
                 IP = Configuration["Service:IP"],
                 Port = Convert.ToInt32(Configuration["Service:Port"]),
@@ -47,12 +49,8 @@ namespace API001
             {
                 IP = Configuration["Consul:IP"],
                 Port = Convert.ToInt32(Configuration["Consul:Port"])
-            });
-            app.Map("/health", builder =>
-            {
-                builder.Run(async context => await context.Response.WriteAsync("health"));
-            });
-            app.UseMvc();
+            })
+            .UseMvc();
         }
     }
 }

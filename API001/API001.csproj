@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConsulCore\ConsulCore.csproj" />
+    <ProjectReference Include="..\SerilogCore\SerilogCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>

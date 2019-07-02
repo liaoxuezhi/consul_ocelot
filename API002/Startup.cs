@@ -46,10 +46,6 @@ namespace API002
                 IP = Configuration["Consul:IP"],
                 Port = Convert.ToInt32(Configuration["Consul:Port"])
             });
-            app.Map("/health", builder =>
-            {
-                builder.Run(async context => await context.Response.WriteAsync("health"));
-            });
             app.UseMvc();
         }
     }
