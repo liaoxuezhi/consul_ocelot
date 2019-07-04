@@ -24,7 +24,7 @@ namespace ConsulCore
             var registration = new AgentServiceRegistration()
             {
                 Checks = new[] { httpCheck },
-                ID = healthService.Name + "_" + healthService.Port,
+                ID = Guid.NewGuid().ToString(),
                 Name = healthService.Name,
                 Address = healthService.IP,
                 Port = healthService.Port,

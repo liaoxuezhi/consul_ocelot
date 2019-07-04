@@ -40,7 +40,7 @@
   ],
   "GlobalConfiguration": {
     "ServiceDiscoveryProvider": {
-      "Host": "172.16.10.125",
+      "Host": "172.16.10.126",
       "Port": 8500
     },
     "RateLimitOptions": {
